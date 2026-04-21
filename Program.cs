@@ -1,10 +1,10 @@
-﻿using System.Globalization;
-using CustomExceptions;
+﻿using CustomExceptions;
 using HorseStuff;
 using PlayerStuff;
 using SavingStuff;
 using static RacingStuff.Races;
 using CustomEnums;
+using static StaticStuff.MiscellaneousStatic;
 namespace program
 {
 	public class Program
@@ -23,8 +23,8 @@ namespace program
 					string? inputName = Console.ReadLine();
 					if (!string.IsNullOrEmpty(inputName))
 					{
-						string actualName = char.ToUpper(inputName[0]) + inputName.Substring(1).ToLower();
-						Players.Insert(0, new Player(actualName));
+						string Name = FixNameCasing(inputName);
+						Players.Insert(0, new Player(Name));
 						break;
 					}
 					else
@@ -45,11 +45,10 @@ namespace program
 				{
 					Console.WriteLine("What is your name?");
 					string name = Console.ReadLine();
-					Player? player = Players.FirstOrDefault(n => n.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+					Player? player = FindPlayerInList(Players, name);
 					if (player != null)
 					{
-						Players.Remove(player);
-						Players.Insert(0, player);
+						MovePlayerToFrontOfList(Players, player);
 						Console.WriteLine($"Welcome back {player.Name}.");
 						break;
 					}

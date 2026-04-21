@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
-using program;
 using Savables;
 using SavingStuff;
 
@@ -28,10 +27,6 @@ namespace HorseStuff
 		public async Task<string> StartRace()
 		{
 			int speed = random.Next(1000, 5000);
-			//if (Name == "a")
-			//{
-			//	speed = 1;
-			//}
 			await Task.Delay(speed);
 			return Name;
 		}
