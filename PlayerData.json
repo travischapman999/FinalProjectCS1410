@@ -1,18 +1,10 @@
 [
   {
-    "Name": "B",
-    "Money": 1000
-  },
-  {
-    "Name": "A",
-    "Money": 1000
-  },
-  {
     "Name": "Travis",
     "Money": 1000
   },
   {
-    "Name": "Bob",
+    "Name": "A",
     "Money": 1000
   }
 ]

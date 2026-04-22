@@ -39,8 +39,16 @@ namespace SavingStuff
 		public static List<Player> LoadPlayers()
 		{
 			string playerData = File.ReadAllText(PlayerPath);
-			List<Player> test = JsonSerializer.Deserialize<List<Player>>(playerData);
-			return test;
+			if (playerData != "\r\n")
+			{
+				List<Player> players = JsonSerializer.Deserialize<List<Player>>(playerData);
+				return players;
+			}
+			else
+			{
+				List<Player> players = new List<Player> { new Player("Test_player") };
+				return players;
+			}
 		}
 		public static List<Horse> LoadHorses()
 		{

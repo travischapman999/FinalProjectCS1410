@@ -1,9 +1,10 @@
-﻿using CustomExceptions;
+﻿using System.Xml.Linq;
+using CustomEnums;
+using CustomExceptions;
 using HorseStuff;
 using PlayerStuff;
 using SavingStuff;
 using static RacingStuff.Races;
-using CustomEnums;
 using static StaticStuff.MiscellaneousStatic;
 namespace program
 {
@@ -17,11 +18,16 @@ namespace program
 			string answer = Console.ReadLine();
 			while (true)
 			{
+				Player? testPlayer = Players.FirstOrDefault(n => n.Name.Equals("Test_player", StringComparison.OrdinalIgnoreCase));
+				if (testPlayer != null)
+				{
+					Players.Remove(testPlayer);
+				}
 				if (answer.ToLower() == "y")
 				{
 					Console.WriteLine("What is your name?");
 					string? inputName = Console.ReadLine();
-					if (!string.IsNullOrEmpty(inputName))
+					if (!string.IsNullOrEmpty(inputName) && !Players.Contains(FindPlayerInList(Players, inputName)))
 					{
 						string Name = FixNameCasing(inputName);
 						Players.Insert(0, new Player(Name));
@@ -88,7 +94,8 @@ namespace program
 				{
 					Console.WriteLine($"{(int)option}: {option}");
 				}
-				MyEnums Continue = (MyEnums)int.Parse(Console.ReadLine());
+				int.TryParse(Console.ReadLine(), out int Selection);
+				MyEnums Continue = (MyEnums)Selection;
 				switch (Continue)
 				{
 					case MyEnums.PlaceBet:
